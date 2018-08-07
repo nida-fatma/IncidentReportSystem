@@ -1,0 +1,65 @@
+<%= form_with(model: detail_incident_report, local: true, multipart: true) do |form| %>
+  <% if detail_incident_report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(detail_incident_report.errors.count, "error") %> prohibited this detail_incident_report from being saved:</h2>
+
+      <ul>
+      <% detail_incident_report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>Incident Reporting Page</div>
+
+  <div class="field">
+    <%= form.label :incident_type %>
+    <%= form.select :incident_type, options_for_select([["Select One", ""], "Cell", "Work", "Office", "Home", "Other"]) %>
+  </div>
+
+   <div class="field">
+    <%= form.label :people_involved %>
+    <%= form.text_field :people_involved %>
+  </div>
+
+  <div class="field">
+    <%= form.label :other_observer %>
+    <%= form.text_field :other_observer %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_time_observed %>
+    <%= form.text_area :date_time_observed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location %>
+    <%= form.text_field :location %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <%= form.fields_for :observer do |f| %>
+    <%= f.label :name %>
+    <p><%= f.text_field :name %></p>
+    <%= f.label :email %>
+    <p><%= f.text_field :email %></p>
+    <%= f.label :role %>
+    <p><%= f.text_field :role %></p>
+  <% end %>
+
+  <%= form.fields_for :attachments do |f| %>
+    <p>
+    <%= f.file_field :attachment, multiple: true, name: "detail_incident_report[attachments_attributes][][attachment]"  %>
+    </p>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>

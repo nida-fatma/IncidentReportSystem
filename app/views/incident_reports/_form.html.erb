@@ -1,4 +1,4 @@
-<%= form_with(model: incident_report, local: true) do |form| %>
+<%= form_with(model: incident_report, local: true, multipart: true) do |form| %>
   <% if incident_report.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(incident_report.errors.count, "error") %> prohibited this incident_report from being saved:</h2>
@@ -17,10 +17,12 @@
     <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
- 
-  <%= form.fields_for :pictures do |f| %>
+
+  <%= form.fields_for :attachments do |f| %>
              <p>
-                 <%= f.file_field :picture, multiple: true %>
+                 <%= f.file_field :attachment, multiple: true, name: "incident_report[attachments_attributes][][attachment]"  %>
+
+
              </p>
 
          <% end %>
@@ -28,4 +30,7 @@
   <div class="actions">
     <%= form.submit %>
   </div>
+
+    <%= link_to 'Report Incident in Detail', new_detail_incident_report_path %>
+
 <% end %>

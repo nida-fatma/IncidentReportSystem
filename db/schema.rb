@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_06_234240) do
+ActiveRecord::Schema.define(version: 2018_08_07_104233) do
+
+  create_table "attachments", force: :cascade do |t|
+    t.string "attachment"
+    t.integer "attachable_id"
+    t.string "attachable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "detail_incident_reports", force: :cascade do |t|
+    t.string "incident_type"
+    t.string "people_involved"
+    t.string "other_observer"
+    t.datetime "date_time_observed"
+    t.string "location"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "incident_reports", force: :cascade do |t|
     t.text "description"
@@ -18,12 +37,11 @@ ActiveRecord::Schema.define(version: 2018_08_06_234240) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pictures", force: :cascade do |t|
-    t.string "picture"
-    t.integer "imageable_id"
-    t.string "imageable_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "observers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "role"
+    t.integer "detail_incident_report_id"
   end
 
 end
