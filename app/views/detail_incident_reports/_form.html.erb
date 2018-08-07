@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= form.label :incident_type %>
-    <%= form.select :incident_type, options_for_select([["Select One", ""], "Cell", "Work", "Office", "Home", "Other"]) %>
+    <%= form.select :incident_type, options_for_select(DetailIncidentReport::INCIDENT_TYPE, selected: @detail_incident_report.incident_type, prompt: "Please Select") %>
   </div>
 
    <div class="field">
@@ -30,7 +30,7 @@
 
   <div class="field">
     <%= form.label :date_time_observed %>
-    <%= form.text_area :date_time_observed %>
+    <%= form.datetime_select :date_time_observed %>
   </div>
 
   <div class="field">
@@ -43,14 +43,17 @@
     <%= form.text_area :description %>
   </div>
 
-  <%= form.fields_for :observer do |f| %>
-    <%= f.label :name %>
-    <p><%= f.text_field :name %></p>
-    <%= f.label :email %>
-    <p><%= f.text_field :email %></p>
-    <%= f.label :role %>
-    <p><%= f.text_field :role %></p>
-  <% end %>
+  <div>anonymus reporting or observer details</div>
+  <div class="field">
+    <%= form.fields_for :observer do |f| %>
+      <%= f.label :name %>
+      <p><%= f.text_field :name %></p>
+      <%= f.label :email %>
+      <p><%= f.text_field :email %></p>
+      <%= f.label :role %>
+      <p><%= f.text_field :role %></p>
+    <% end %>
+  </div>
 
   <%= form.fields_for :attachments do |f| %>
     <p>
