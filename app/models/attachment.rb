@@ -1,5 +1,5 @@
 class Attachment < ApplicationRecord
   belongs_to :attachable, polymorphic: true
-  mount_uploaders :attachments, AttachmentUploader
+  mount_uploader :attachment, AttachmentUploader
 
 end
