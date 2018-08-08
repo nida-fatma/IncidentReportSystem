@@ -23,7 +23,9 @@ class DetailIncidentReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def detail_incident_report_params
-      params.require(:detail_incident_report).permit( :incident_type, :people_involved, :other_observer, :date_time_observed,
+      required_parameter = params.require(:detail_incident_report).permit( :incident_type, :people_involved, :other_observer, :date_time_observed,
        :location, :description, observer_attributes: [:name, :email, :role], attachments_attributes: [:attachment])
+      required_parameter[:location] = params[:location_other_text] if params[:location] == 'other'
+      required_parameter
     end
 end

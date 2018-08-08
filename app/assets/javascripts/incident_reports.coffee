@@ -2,6 +2,17 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$('.observer_detail').on 'click', ->
-  $('.observer_detail_section').toggle()
+  $(document).ready ->
+
+    $('.observer_detail').change ->
+      $('.observer_detail_section').toggle()
+
+    $('body').on 'change', '#detail_incident_report_location', ->
+      if @value == 'other'
+        $('.location_text').val ''
+        $('.location_text').show()
+      else
+        $('.location_text').hide()
+    return
   return
+
