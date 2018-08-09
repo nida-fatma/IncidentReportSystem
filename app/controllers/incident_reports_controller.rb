@@ -1,5 +1,6 @@
-class IncidentReportsController < ApplicationController
+# frozen_string_literal: true
 
+class IncidentReportsController < ApplicationController
   # GET /incident_reports/new
   def new
     @incident_report = IncidentReport.new
@@ -20,8 +21,8 @@ class IncidentReportsController < ApplicationController
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def incident_report_params
-      params.require(:incident_report).permit( :description,  :attachments_attributes => [:attachment])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def incident_report_params
+    params.require(:incident_report).permit(:description, attachments_attributes: [:attachment])
+  end
 end

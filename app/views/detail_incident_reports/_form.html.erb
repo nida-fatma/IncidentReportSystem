@@ -15,51 +15,53 @@
 
   <div class="field">
     <%= form.label :incident_type %>
-    <%= form.select :incident_type, options_for_select(DetailIncidentReport::INCIDENT_TYPE, selected: @detail_incident_report.incident_type), {prompt: "Please Select",  class: "chosen-select"}, { :multiple => true} %>
+    <%= form.select :incident_type, options_for_select(DetailIncidentReport::INCIDENT_TYPE, selected: @detail_incident_report.incident_type), { include_hidden: false }, { :multiple => true,  class: "chosen-select"} %>
   </div>
 
    <div class="field">
     <%= form.label :people_involved %>
-    <%= form.text_field :people_involved %>
+    <%= form.text_field :people_involved, placeholder: 'student, teacher, staff, parent, grade level' %>
   </div>
 
   <div class="field">
     <%= form.label :other_observer %>
-    <%= form.text_field :other_observer %>
+    <%= form.text_field :other_observer, placeholder: 'Name and details' %>
   </div>
 
   <div class="field">
     <%= form.label :date_time_observed %>
-    <%= form.text_field :date_time_observed %>
+    <%= form.text_field :date_time_observed, placeholder: 'Approximate Time' %>
   </div>
 
   <div class="field">
     <%= form.label :location %>
-    <%= form.select :location, options_for_select(DetailIncidentReport::LOCATIONS, selected: @detail_incident_report.incident_type), {prompt: "Please Select"} %>
+    <%= form.select :location, options_for_select(DetailIncidentReport::LOCATIONS, selected: @detail_incident_report.incident_type), {prompt: "Select"} %>
     <p><%= form.text_area :location_other_text, class: 'location_text hidden' %><p>
   </div>
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, placeholder: 'Describe incident in as much detail as possible' %>
   </div>
 
   <div class="field">
-    <%= form.label :observer_detail %><br />
-    <%= form.label :observer_detail, "Fill Detail", value: true  %>
-    <%= form.radio_button :observer_detail, true, :checked => true, class: 'observer_detail'%>
-    <%= form.label :observer_detail, "anonymus", value: false %>
-    <%= form.radio_button :observer_detail, false, class: 'observer_detail' %>
-  </div>
-
-  <div class="field observer_detail_section hide">
     <%= form.fields_for :observer do |f| %>
-      <%= f.label :name %>
-      <p><%= f.text_field :name %></p>
-      <%= f.label :email %>
-      <p><%= f.text_field :email %></p>
-      <%= f.label :role %>
-      <p><%= f.select :role, options_for_select(DetailIncidentReport::ROLE_TYPE, selected: @detail_incident_report.observer.role, prompt: "Please Select") %></p>
+      <div class="field">
+        <%= f.label :observer_detail %><br />
+        <%= f.label :observer_detail, "Fill Detail", value: true  %>
+        <%= f.radio_button :observer_detail, true, :checked => true, class: 'observer_detail'%>
+        <%= f.label :observer_detail, "anonymus", value: false %>
+        <%= f.radio_button :observer_detail, false, class: 'observer_detail' %>
+      </div>
+      <% hide_class = (@detail_incident_report.observer.observer_detail == 'false' ? 'hidden' : '')%>
+      <div class="observer_detail_section <%= hide_class %>">
+        <%= f.label :name %>
+        <p><%= f.text_field :name, placeholder: 'Enter name' %></p>
+        <%= f.label 'Email/Phone' %>
+        <p><%= f.text_field :email_or_phone, placeholder: 'Enter email or Phone' %></p>
+        <%= f.label :role %>
+        <p><%= f.select :role, options_for_select(DetailIncidentReport::ROLE_TYPE, selected: @detail_incident_report.observer.role),  {prompt: "Select"} %></p>
+      </div>
     <% end %>
   </div>
 

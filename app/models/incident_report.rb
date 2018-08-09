@@ -1,6 +1,8 @@
-class IncidentReport < ApplicationRecord
-	has_many :attachments, as: :attachable, dependent: :destroy
-	accepts_nested_attributes_for :attachments, allow_destroy: true
+# frozen_string_literal: true
 
-	validates :description, presence: true
+class IncidentReport < ApplicationRecord
+  has_many :attachments, as: :attachable, dependent: :destroy
+  accepts_nested_attributes_for :attachments, allow_destroy: true
+
+  validates :description, presence: true
 end
