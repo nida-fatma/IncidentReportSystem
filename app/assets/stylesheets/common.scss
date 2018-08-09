@@ -12,7 +12,9 @@ p, ol, ul, td {
   font-size: 13px;
   line-height: 18px;
 }
-
+* {
+      box-sizing: border-box;
+}
 pre {
   background-color: #eee;
   padding: 10px;
@@ -21,14 +23,15 @@ pre {
 
 a {
   color: #000;
+  text-decoration: none;
 
   &:visited {
-    color: #666;
+    color: #000;
   }
 
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: #000;
+    text-decoration: underline;
   }
 }
 
@@ -85,3 +88,89 @@ label {
 .hidden {
   display: none;
 }
+.main-heading {
+  font-size: 24px;
+
+  span {
+    font-size: 14px;
+    display: block;
+    font-weight: normal;
+    padding-top: 8px;
+  }
+}
+.clearfix {
+  clear: both;
+  width: 100%;
+}
+.w-50 {
+  width: 50%;
+  float: left;
+}
+.w-25 {
+  width: 25%;
+  float: left;
+}
+.inputs {
+  width: 100%;
+  border: 1px solid #ccc;
+  color: #111;
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+input.inputs {
+  padding: 5px 10px;
+}
+label {
+  font-weight: 500;
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+.btn-sub {
+  font-size: 14px;
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.custom-file-select {
+  font-size: 14px;
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #ececec;
+  width: auto;
+  display: inline-block;
+  clear: both;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
+
+}
+
+.border-box {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px 15px 0px;
+  width: 50%;
+  overflow: hidden;
+}
+
+.custom-file-select input[type="file"] {
+    display: none;
+}
+.chosen-container {
+  width: 100%;
+}
+.observer_detail_section {
+  margin-top: 30px;
+}
+.location_text {
+  margin-top: 10px;
+}
+.file-name-section {
+  width: 83%;
+  float: right;
+  margin-top: 19px;
+}
+

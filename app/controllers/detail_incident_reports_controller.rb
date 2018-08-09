@@ -15,6 +15,7 @@ class DetailIncidentReportsController < ApplicationController
       if @detail_incident_report.save
         format.html { redirect_to root_path, notice: 'Thank You Detail Incident has been successfully Reported.' }
       else
+        @detail_incident_report.attachments.build if @detail_incident_report.attachments.blank?
         format.html { render :new }
       end
     end

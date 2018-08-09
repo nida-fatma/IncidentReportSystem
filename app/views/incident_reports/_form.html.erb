@@ -1,4 +1,5 @@
 <%= form_with(model: incident_report, local: true, multipart: true) do |form| %>
+  <p id="notice"><%= flash[:notice] %></p>
   <% if incident_report.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(incident_report.errors.count, "error") %> prohibited this incident_report from being saved:</h2>
@@ -11,24 +12,27 @@
     </div>
   <% end %>
 
-  <div>Incident Reporting Page</div>
-
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <div class="clearfix"></div>
+    <div class="w-50">
+      <%= form.text_area :description, class: 'inputs', rows: '5', placeholder: 'Describe incident'  %>
+    </div>
+    <div class="clearfix"></div>
   </div>
 
-  <%= form.fields_for :attachments do |f| %>
-             <p>
-                 <%= f.file_field :attachment, multiple: true, name: "incident_report[attachments_attributes][][attachment]"  %>
-
-
-             </p>
-
-         <% end %>
+  <div class= 'file-selection-area'>
+    <%= form.fields_for :attachments do |f| %>
+      <label class="custom-file-select">
+        Add photos
+        <%= f.file_field :attachment, multiple: true, name: "incident_report[attachments_attributes][][attachment]", id: 'incident-file-upload'  %>
+      </label>
+      <label id="file-name" class= 'file-name-section'></label>
+    <% end %>
+  </div>
 
   <div class="actions">
-    <%= form.submit 'Submit' %>
+    <%= form.submit 'Submit', class: 'btn-sub' %>
   </div>
 
     <%= link_to 'Report Incident in Detail', new_detail_incident_report_path %>

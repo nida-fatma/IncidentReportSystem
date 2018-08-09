@@ -18,6 +18,9 @@ $(document).on 'turbolinks:load', ->
   $('.chosen-select').chosen
     allow_single_deselect: true
     no_results_text: 'No results matched'
-    width: '200px'
+  $('#incident-file-upload').change ->
+    $('#file-name').text if @files.length > 1 then @files.length + ' files selected' else @files[0].name
+    return
   return
+
 
