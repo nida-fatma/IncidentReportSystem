@@ -131,6 +131,7 @@ label {
   padding: 8px 20px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  cursor: pointer;
 }
 
 .custom-file-select {
@@ -172,5 +173,14 @@ label {
   width: 83%;
   float: right;
   margin-top: 19px;
+}
+
+.detail-incident {
+  width: 16%;
+  float: right;
+  margin-right: 911px;
+  padding-right: 0;
+  border: 1px solid #ccc;
+  background: #ececec;
 }
 

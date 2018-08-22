@@ -6,9 +6,9 @@ class CreateDetailIncidentReports < ActiveRecord::Migration[5.2]
       t.text :incident_type, default: [], array: true
       t.string :people_involved
       t.string :other_observer
-      t.string :date_time_observed
+      t.datetime :date_time_observed
       t.string :location
-      t.string :description
+      t.references :incident_report, foreign_key: true
 
       t.timestamps
     end

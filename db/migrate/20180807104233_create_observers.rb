@@ -6,7 +6,9 @@ class CreateObservers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :email_or_phone
       t.string :role
-      t.integer :detail_incident_report_id
+      t.references :detail_incident_report
+
+      t.timestamps
     end
   end
 end

@@ -5,7 +5,8 @@ class DetailIncidentReportsController < ApplicationController
   def new
     @detail_incident_report = DetailIncidentReport.new
     @detail_incident_report.attachments.build
-    @detail_incident_report.build_observer
+    @detail_incident_report = @detail_incident_report.build_observer
+    @detail_incident_repor.build_observer 
   end
 
   # POST /incident_reports

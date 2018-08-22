@@ -18,8 +18,11 @@ $(document).on 'turbolinks:load', ->
   $('.chosen-select').chosen
     allow_single_deselect: true
     no_results_text: 'No results matched'
+    width: '100%'
   $('#incident-file-upload').change ->
     $('#file-name').text if @files.length > 1 then @files.length + ' files selected' else @files[0].name
+  $('.detail-incident').on 'click', ->
+    $('.detail-incident-section').toggle()
     return
   return
 

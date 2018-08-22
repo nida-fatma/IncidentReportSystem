@@ -21,6 +21,92 @@
     <div class="clearfix"></div>
   </div>
 
+    <div>
+    <% label = @incident_report.incident_report_type == 'true' ? 'Report Incident in BRIEF' : 'Report Incident in dETAI'%>
+    <%= form.label label %>
+    <%= form.check_box :incident_report_type, {class: 'btn-sub detail-incident'}, true, false %>
+
+  </div>
+
+  <% hide_class = (@incident_report.incident_report_type == 'true' ? '' : 'hidden')%>
+
+  <div class= 'detail-incident-section <%= hide_class %>'>
+    <%= form.fields_for :detail_incident_report do |f| %>
+      <div class="field">
+        <%= f.label :incident_type %>
+        <div class="w-25">
+          <%= f.select :incident_type, options_for_select(DetailIncidentReport::INCIDENT_TYPE, selected: @detail_incident_report.incident_type), { include_hidden: false }, { :multiple => true,  class: "chosen-select inputs"} %>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="field">
+        <%= f.label :people_involved %>
+        <div class="w-25">
+          <%= f.text_field :people_involved, placeholder: 'student, teacher, staff, parent, grade level', class: "inputs" %>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="field">
+        <%= f.label :other_observer %>
+        <div class="w-25">
+          <%= f.text_field :other_observer, placeholder: 'Name and details', class: "inputs" %>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="field">
+        <%= f.label :date_time_observed %>
+        <div class="w-25">
+          <%= f.datetime_field :date_time_observed, placeholder: 'Approximate Time', class: "inputs" %>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="field">
+        <%= f.label :location %>
+        <div class="w-25">
+          <%= f.select :location, options_for_select(DetailIncidentReport::LOCATIONS, selected: @detail_incident_report.incident_type), {prompt: "Select"}, class: "inputs chosen-select" %>
+        </div>
+        <div class="clearfix"></div>
+        <div class="w-50"><%= f.text_area :location_other_text, class: 'location_text hidden inputs', placeholder: 'Please specify other location' %></div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="field">
+        <%= f.fields_for :observer do |observer_form| %>
+          <div class="field radios">
+            <%= observer_form.label :observer_detail %><br />
+            <div class="w-25">
+              <%= observer_form.label :observer_detail, "Fill Detail", value: true  %>
+              <%= observer_form.radio_button :observer_detail, true, :checked => true, class: 'observer_detail'%>
+            </div>
+            <div class="w-25">
+              <%= observer_form.label :observer_detail, "anonymus", value: false %>
+              <%= observer_form.radio_button :observer_detail, false, class: 'observer_detail' %>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <% hide_class = (@detail_incident_report.observer.observer_detail == 'false' ? 'hidden' : '')%>
+          <div class="observer_detail_section <%= hide_class %>">
+            <%= observer_form.label :name %>
+             <div class="w-25">
+              <%= observer_form.text_field :name, placeholder: 'Enter name', class: "inputs"  %>
+            </div>
+            <div class="clearfix"></div>
+            <%= observer_form.label 'Email/Phone' %>
+            <div class="w-25"><%= observer_form.text_field :email_or_phone, placeholder: 'Enter email or Phone', class: "inputs"  %></div>
+            <div class="clearfix"></div>
+            <%= observer_form.label :role %>
+            <div class="w-25"><%= observer_form.select :role, options_for_select(DetailIncidentReport::ROLE_TYPE, selected: @detail_incident_report.observer.role),  {prompt: "Select"}, class: "inputs chosen-select"  %></div>
+          </div>
+        <% end %>
+      </div>
+      <div class="clearfix"></div>
+    <% end %>
+  </div>
+
   <div class= 'file-selection-area'>
     <%= form.fields_for :attachments do |f| %>
       <label class="custom-file-select">
@@ -31,10 +117,13 @@
     <% end %>
   </div>
 
+
+
+  
+
   <div class="actions">
-    <%= form.submit 'Submit', class: 'btn-sub' %>
+    <%= form.submit 'Submit', class: 'btn-sub' %>OR    
   </div>
 
-    <%= link_to 'Report Incident in Detail', new_detail_incident_report_path %>
 
 <% end %>

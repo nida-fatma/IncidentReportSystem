@@ -8,8 +8,9 @@ class DetailIncidentReport < ApplicationRecord
   LOCATIONS = { 'On school campuses and grounds' => 'campus', 'During transportation to and from school' => 'transport', 'At school-sponsored events' => 'events', 'Other' => 'other' }.freeze
 
   has_one :observer, dependent: :destroy
-  has_many :attachments, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :attachments, :observer, reject_if: :all_blank
+  belongs_to :incident_report 
+  # has_many :attachments, as: :attachable, dependent: :destroy
+  accepts_nested_attributes_for :observer, reject_if: :all_blank
 
-  validates :description, presence: true
+  # validates :description, presence: true
 end
