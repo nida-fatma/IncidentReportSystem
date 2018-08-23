@@ -6,7 +6,7 @@ class CreateObservers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :email_or_phone
       t.string :role
-      t.references :detail_incident_report
+      t.references :detail_incident_report, foreign_key: true
 
       t.timestamps
     end
