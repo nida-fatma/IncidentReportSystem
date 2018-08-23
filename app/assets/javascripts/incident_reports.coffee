@@ -8,12 +8,12 @@ $(document).on 'turbolinks:load', ->
   $('.observer_detail').change ->
     $('.observer_detail_section').toggle()
     return
-  $('body').on 'change', '#detail_incident_report_location', ->
+  $('#location-select').on 'change', ->
     if @value == 'other'
-      $('.location_text').val ''
-      $('.location_text').show()
+      $('.location-text').val ''
+      $('.location-text').show()
     else
-      $('.location_text').hide()
+      $('.location-text').hide()
     return
   $('.chosen-select').chosen
     allow_single_deselect: true
@@ -21,8 +21,10 @@ $(document).on 'turbolinks:load', ->
     width: '100%'
   $('#incident-file-upload').change ->
     $('#file-name').text if @files.length > 1 then @files.length + ' files selected' else @files[0].name
-  $('.detail-incident').on 'click', ->
+  $('.detail-incident').on 'change', ->
     $('.detail-incident-section').toggle()
+    label = if this.checked then 'Report Incident in breif' else 'Report Incident in detail'
+    $('.lable-text').text(label)
     return
   return
 

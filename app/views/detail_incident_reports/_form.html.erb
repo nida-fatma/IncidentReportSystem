@@ -1,112 +1,76 @@
-<%= form_with(model: detail_incident_report, local: true, multipart: true) do |form| %>
-  <p id="notice"><%= flash[:notice] %></p>
-  <% if detail_incident_report.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(detail_incident_report.errors.count, "error") %> prohibited this detail_incident_report from being saved:</h2>
-
-      <ul>
-      <% detail_incident_report.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-
+<%= form.fields_for :detail_incident_report do |f| %>
   <div class="field">
-    <%= form.label :incident_type %>
+    <%= f.label :incident_type %>
     <div class="w-25">
-      <%= form.select :incident_type, options_for_select(DetailIncidentReport::INCIDENT_TYPE, selected: @detail_incident_report.incident_type), { include_hidden: false }, { :multiple => true,  class: "chosen-select inputs"} %>
+      <%= f.select :incident_type, options_for_select(DetailIncidentReport::INCIDENT_TYPE, selected: @incident_report.detail_incident_report.incident_type), { include_hidden: false }, { :multiple => true,  class: "chosen-select inputs"} %>
     </div>
     <div class="clearfix"></div>
   </div>
 
-   <div class="field">
-    <%= form.label :people_involved %>
+  <div class="field">
+    <%= f.label :people_involved %>
     <div class="w-25">
-      <%= form.text_field :people_involved, placeholder: 'student, teacher, staff, parent, grade level', class: "inputs" %>
+      <%= f.text_field :people_involved, placeholder: 'student, teacher, staff, parent, grade level', class: "inputs" %>
     </div>
     <div class="clearfix"></div>
   </div>
 
   <div class="field">
-    <%= form.label :other_observer %>
+    <%= f.label :other_observer %>
     <div class="w-25">
-      <%= form.text_field :other_observer, placeholder: 'Name and details', class: "inputs" %>
+      <%= f.text_field :other_observer, placeholder: 'Name and details', class: "inputs" %>
     </div>
     <div class="clearfix"></div>
   </div>
 
   <div class="field">
-    <%= form.label :date_time_observed %>
+    <%= f.label :date_time_observed %>
     <div class="w-25">
-      <%= form.text_field :date_time_observed, placeholder: 'Approximate Time', class: "inputs" %>
+      <%= f.datetime_field :date_time_observed, placeholder: 'Approximate Time', class: "inputs" %>
     </div>
     <div class="clearfix"></div>
   </div>
 
   <div class="field">
-    <%= form.label :location %>
+    <%= f.label :location %>
     <div class="w-25">
-      <%= form.select :location, options_for_select(DetailIncidentReport::LOCATIONS, selected: @detail_incident_report.incident_type), {prompt: "Select"}, class: "inputs chosen-select" %>
+      <%= f.select :location, options_for_select(DetailIncidentReport::LOCATIONS, selected: @incident_report.detail_incident_report.incident_type), {prompt: "Select"}, {class: "inputs chosen-select", id: 'location-select'}
+         %>
     </div>
     <div class="clearfix"></div>
-    <div class="w-50"><%= form.text_area :location_other_text, class: 'location_text hidden inputs', placeholder: 'Please specify other location' %></div>
+    <div class="w-50"><%= f.text_area :location_other_text, class: 'location-text hidden inputs', placeholder: 'Please specify other location' %></div>
     <div class="clearfix"></div>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
-    <div class="w-50">
-      <%= form.text_area :description, placeholder: 'Describe incident in as much detail as possible', class: "inputs"  %>
-    </div>
-    <div class="clearfix"></div>
-  </div>
-
-  <div class="field">
-    <%= form.fields_for :observer do |f| %>
+    <%= f.fields_for :observer do |observer_form| %>
       <div class="field radios">
-        <%= f.label :observer_detail %><br />
-        <div class="w-25">
-          <%= f.label :observer_detail, "Fill Detail", value: true  %>
-          <%= f.radio_button :observer_detail, true, :checked => true, class: 'observer_detail'%>
+        <%= observer_form.label :observer_detail %><br />
+        <div class="w-20">
+          <%= observer_form.label :observer_detail, "Fill Detail", value: true  %>
+          <%= observer_form.radio_button :observer_detail, true, :checked => true, class: 'observer_detail'%>
         </div>
         <div class="w-25">
-          <%= f.label :observer_detail, "anonymus", value: false %>
-          <%= f.radio_button :observer_detail, false, class: 'observer_detail' %>
+          <%= observer_form.label :observer_detail, "anonymus", value: false %>
+          <%= observer_form.radio_button :observer_detail, false, class: 'observer_detail' %>
         </div>
       </div>
       <div class="clearfix"></div>
-      <% hide_class = (@detail_incident_report.observer.observer_detail == 'false' ? 'hidden' : '')%>
+      <% hide_class = (@incident_report.detail_incident_report.observer.observer_detail == 'false' ? 'hidden' : '')%>
       <div class="observer_detail_section <%= hide_class %>">
-        <%= f.label :name %>
+        <%= observer_form.label :name %>
          <div class="w-25">
-          <%= f.text_field :name, placeholder: 'Enter name', class: "inputs"  %>
+          <%= observer_form.text_field :name, placeholder: 'Enter name', class: "inputs"  %>
         </div>
         <div class="clearfix"></div>
-        <%= f.label 'Email/Phone' %>
-        <div class="w-25"><%= f.text_field :email_or_phone, placeholder: 'Enter email or Phone', class: "inputs"  %></div>
+        <%= observer_form.label 'Email/Phone' %>
+        <div class="w-25"><%= observer_form.text_field :email_or_phone, placeholder: 'Enter email or Phone', class: "inputs"  %></div>
         <div class="clearfix"></div>
-        <%= f.label :role %>
-        <div class="w-25"><%= f.select :role, options_for_select(DetailIncidentReport::ROLE_TYPE, selected: @detail_incident_report.observer.role),  {prompt: "Select"}, class: "inputs chosen-select"  %></div>
+        <%= observer_form.label :role %>
+        <div class="w-25"><%= observer_form.select :role, options_for_select(DetailIncidentReport::ROLE_TYPE, selected: @incident_report.detail_incident_report.observer.role),  {prompt: "Select"}, class: "inputs chosen-select"  %></div>
       </div>
     <% end %>
   </div>
   <div class="clearfix"></div>
-
-  <div class= 'file-selection-area'>
-    <%= form.fields_for :attachments do |f| %>
-      <label class="custom-file-select">
-        Add photos videos or files
-      <%= f.file_field :attachment, multiple: true, name: "detail_incident_report[attachments_attributes][][attachment]" , id: 'incident-file-upload' %>
-      </label>
-      <label id="file-name" class= 'file-name-section'></label>
-    <% end %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'Submit', class: 'btn-sub' %>
-  </div>
-
-  <%= link_to 'Back to Incident Report', root_path %>
 <% end %>
+

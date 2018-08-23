@@ -7,7 +7,7 @@ class Observer < ApplicationRecord
   validate :validate_for_email_or_phone, if: -> { observer_detail == 'true' }
 
   def validate_for_email_or_phone
-    unless email_or_phone =~ URI::MailTo::EMAIL_REGEXP || email_or_phone =~ /\d[0-9]\)*\z/
+    unless email_or_phone =~ URI::MailTo::EMAIL_REGEXP || email_or_phone =~ /\d[0-9]\)*\z/ || email_or_phone.blank?
       errors.add(:email_or_phone, 'format is not correct')
     end
   end
