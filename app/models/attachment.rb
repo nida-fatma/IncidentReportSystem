@@ -10,6 +10,6 @@ class Attachment < ApplicationRecord
   # Validations
 
   # Validate attachment only if reported incident is in brief
-  validates :attachment, allow_blank: true, format: { with: %r{.(gif|jpg|png)\Z}i },
+  validates :attachment, allow_blank: true, format: { with: %r{.(gif|jpeg|jpg|png)\Z}i },
    if: -> { incident_report.incident_report_type? }
 end

@@ -12,7 +12,7 @@
   <% end %>
 
   <div class='field'>
-    <%= form.label :description %>
+    <%= form.label 'Description*' %>
     <div class='w-50'>
       <%= form.text_area :description, class: 'inputs', rows: '5', placeholder: 'Describe incident'  %>
     </div>
@@ -26,7 +26,7 @@
   <div class= 'file-selection-area'>
     <%= form.fields_for :attachments, (incident_report.attachments.first || Attachment.new) do |f| %>
       <label class='custom-file-select'>
-        Add photos
+        Add Files
         <%= f.file_field :attachment, multiple: true, name: "incident_report[attachments_attributes][][attachment]", id: 'incident-file-upload'  %>
       </label>
       <label id='file-name' class= 'file-name-section'></label>

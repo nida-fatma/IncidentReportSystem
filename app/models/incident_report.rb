@@ -13,7 +13,7 @@ class IncidentReport < ApplicationRecord
 
 
   # Validations
-  validates :description, presence: true
+  validates :description, length: {maximum: 2000, minimum: 15}
 
   # Incident report type 0 denotes incident in brief & 1 denotes incident in detail
   def incident_report_type?

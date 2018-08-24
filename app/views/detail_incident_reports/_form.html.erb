@@ -34,7 +34,7 @@
   <div class="field">
     <%= f.label :location %>
     <div class="w-25">
-      <%= f.select :location, options_for_select(DetailIncidentReport::LOCATIONS, selected: detail_incident_report.incident_type), {prompt: "Select"}, {class: "inputs chosen-select", id: 'location-select'}
+      <%= f.select :location, options_for_select(DetailIncidentReport::LOCATIONS, selected: detail_incident_report.location), {prompt: "Select"}, {class: "inputs chosen-select", id: 'location-select'}
          %>
     </div>
     <div class="clearfix"></div>
@@ -45,7 +45,6 @@
   <div class="field">
     <%= f.fields_for :observer do |observer_form| %>
       <div class="field radios">
-        <%= observer_form.label :observer_detail %><br />
         <div class="w-20">
           <%= observer_form.label :observer_detail, "Oberver Details", value: true  %>
           <%= observer_form.radio_button :observer_detail, true, :checked => true, class: 'observer_detail'%>
@@ -57,16 +56,16 @@
       </div>
       <div class="clearfix"></div>
       <div class="observer_detail_section <%= observer_class(detail_incident_report) %>">
-        <%= observer_form.label :name %>
+        <%= observer_form.label 'Name*' %>
          <div class="w-25">
           <%= observer_form.text_field :name, placeholder: 'Enter name', class: "inputs"  %>
         </div>
         <div class="clearfix"></div>
         <%= observer_form.label 'Email/Phone' %>
-        <div class="w-25"><%= observer_form.text_field :email_or_phone, placeholder: 'Enter email or Phone', class: "inputs"  %></div>
+        <div class="w-25"><%= observer_form.text_field :email_or_phone, placeholder: 'Enter email or phone', class: "inputs"  %></div>
         <div class="clearfix"></div>
         <%= observer_form.label :role %>
-        <div class="w-25"><%= observer_form.select :role, options_for_select(DetailIncidentReport::ROLE_TYPE, selected: detail_incident_report.observer.role),  {prompt: "Select"}, class: "inputs chosen-select"  %></div>
+        <div class="w-25"><%= observer_form.select :role, options_for_select(DetailIncidentReport::ROLE_TYPE, selected: detail_incident_report.observer_role),  {prompt: "Select"}, class: "inputs chosen-select"  %></div>
       </div>
     <% end %>
   </div>
