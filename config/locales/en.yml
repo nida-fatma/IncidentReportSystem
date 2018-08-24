@@ -30,7 +30,25 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  brief_report: 'Report Incident in brief'
+  detail_report: 'Report Incident in detail'
+  incident_reports:
+    create:
+      notice: "Thank You, Incident has been successfully Reported."
   activerecord:
     attributes:
       attachments:
         attachment: ''
+      detail_incident_report:
+        base: ''
+    errors:
+      models:
+          attachment:
+            attributes:
+              attachment:
+                invalid: "Photo must GIF, JPG or PNG image in brief report"
+          detail_incident_report:
+            attributes:
+              base:
+                invalid: "Photo must GIF, JPG or PNG image in brief report"
+

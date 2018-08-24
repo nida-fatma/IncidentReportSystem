@@ -3,7 +3,6 @@
   <% if incident_report.errors.any? %>
     <div id='error_explanation'>
       <h2><%= pluralize(incident_report.errors.count, 'error') %> prohibited this incident_report from being saved:</h2>
-
       <ul>
       <% incident_report.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -14,17 +13,14 @@
 
   <div class='field'>
     <%= form.label :description %>
-    <div class='clearfix'></div>
     <div class='w-50'>
       <%= form.text_area :description, class: 'inputs', rows: '5', placeholder: 'Describe incident'  %>
     </div>
     <div class='clearfix'></div>
   </div>
 
-
-  <% hide_class = (incident_report.incident_report_type == '1' ? '' : 'hidden')%>
-  <div class= 'detail-incident-section <%= hide_class %>'>
-    <%= render 'detail_incident_reports/form', form: form %>
+  <div class= 'detail-incident-section <%= incident_class(incident_report) %>'>
+    <%= render 'detail_incident_reports/form', form: form, detail_incident_report: (incident_report.detail_incident_report || DetailIncidentReport.new) %>
   </div>
 
   <div class= 'file-selection-area'>
@@ -38,15 +34,14 @@
   </div>
 
   <div class='custom-checkbox-div'>
-    <% label = incident_report.incident_report_type == '1' ? 'Report Incident in brief' : 'Report Incident in detail'%>
     <label class='custom-checkbox'>
-      <div class='lable-text'><%= label %></div>
+      <div class='lable-text'><%= incident_label(incident_report) %></div>
       <%= form.check_box :incident_report_type, {class: 'btn-sub detail-incident'} %>
     </label>
   </div>
+
   <div class='actions'>
     <%= form.submit 'Submit', class: 'btn-sub' %> OR
   </div>
-
 
 <% end %>

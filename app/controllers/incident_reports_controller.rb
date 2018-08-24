@@ -11,9 +11,9 @@ class IncidentReportsController < ApplicationController
   # POST /incident_reports
   def create
     @incident_report = IncidentReport.new(incident_report_params)
-    respond_to do |format|  
+    respond_to do |format|
       if @incident_report.save
-        format.html { redirect_to root_path, notice: 'Thank You Incident has been successfully Reported.' }
+        format.html { redirect_to root_path, notice: t('.notice') }
       else
         format.html { render :new }
       end
@@ -22,7 +22,7 @@ class IncidentReportsController < ApplicationController
 
   private
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet, only allow the white list through
   def incident_report_params
     params.require(:incident_report).permit(:description, :incident_report_type,
       attachments_attributes: [:attachment], detail_incident_report_attributes: [

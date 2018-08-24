@@ -1,8 +1,8 @@
-<%= form.fields_for :detail_incident_report do |f| %>
+<%= form.fields_for :detail_incident_report, detail_incident_report  do |f| %>
   <div class="field">
     <%= f.label :incident_type %>
     <div class="w-25">
-      <%= f.select :incident_type, options_for_select(DetailIncidentReport::INCIDENT_TYPE, selected: @incident_report.detail_incident_report.incident_type), { include_hidden: false }, { :multiple => true,  class: "chosen-select inputs"} %>
+      <%= f.select :incident_type, options_for_select(DetailIncidentReport::INCIDENT_TYPE, selected: detail_incident_report.incident_type), { include_hidden: false }, { :multiple => true,  class: "chosen-select inputs"} %>
     </div>
     <div class="clearfix"></div>
   </div>
@@ -34,7 +34,7 @@
   <div class="field">
     <%= f.label :location %>
     <div class="w-25">
-      <%= f.select :location, options_for_select(DetailIncidentReport::LOCATIONS, selected: @incident_report.detail_incident_report.incident_type), {prompt: "Select"}, {class: "inputs chosen-select", id: 'location-select'}
+      <%= f.select :location, options_for_select(DetailIncidentReport::LOCATIONS, selected: detail_incident_report.incident_type), {prompt: "Select"}, {class: "inputs chosen-select", id: 'location-select'}
          %>
     </div>
     <div class="clearfix"></div>
@@ -47,17 +47,16 @@
       <div class="field radios">
         <%= observer_form.label :observer_detail %><br />
         <div class="w-20">
-          <%= observer_form.label :observer_detail, "Fill Detail", value: true  %>
+          <%= observer_form.label :observer_detail, "Oberver Details", value: true  %>
           <%= observer_form.radio_button :observer_detail, true, :checked => true, class: 'observer_detail'%>
         </div>
         <div class="w-25">
-          <%= observer_form.label :observer_detail, "anonymus", value: false %>
+          <%= observer_form.label :observer_detail, "Anonymus", value: false %>
           <%= observer_form.radio_button :observer_detail, false, class: 'observer_detail' %>
         </div>
       </div>
       <div class="clearfix"></div>
-      <% hide_class = (@incident_report.detail_incident_report.observer.observer_detail == 'false' ? 'hidden' : '')%>
-      <div class="observer_detail_section <%= hide_class %>">
+      <div class="observer_detail_section <%= observer_class(detail_incident_report) %>">
         <%= observer_form.label :name %>
          <div class="w-25">
           <%= observer_form.text_field :name, placeholder: 'Enter name', class: "inputs"  %>
@@ -67,7 +66,7 @@
         <div class="w-25"><%= observer_form.text_field :email_or_phone, placeholder: 'Enter email or Phone', class: "inputs"  %></div>
         <div class="clearfix"></div>
         <%= observer_form.label :role %>
-        <div class="w-25"><%= observer_form.select :role, options_for_select(DetailIncidentReport::ROLE_TYPE, selected: @incident_report.detail_incident_report.observer.role),  {prompt: "Select"}, class: "inputs chosen-select"  %></div>
+        <div class="w-25"><%= observer_form.select :role, options_for_select(DetailIncidentReport::ROLE_TYPE, selected: detail_incident_report.observer.role),  {prompt: "Select"}, class: "inputs chosen-select"  %></div>
       </div>
     <% end %>
   </div>

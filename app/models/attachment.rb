@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 class Attachment < ApplicationRecord
+  # Association
   belongs_to :incident_report
+
+  # Uploaders
   mount_uploader :attachment, AttachmentUploader
 
-   validates :attachment, allow_blank: true, format: { with: %r{.(gif|jpg|png)\Z}i,
-   message: 'Photo must GIF, JPG or PNG image in brief report' }, 
-   if: -> { incident_report.incident_report_type != '1' }
+  # Validations
+
+  # Validate attachment only if reported incident is in brief
+  validates :attachment, allow_blank: true, format: { with: %r{.(gif|jpg|png)\Z}i },
+   if: -> { incident_report.incident_report_type? }
 end
