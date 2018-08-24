@@ -11,7 +11,7 @@ class IncidentReportsController < ApplicationController
   # POST /incident_reports
   def create
     @incident_report = IncidentReport.new(incident_report_params)
-    respond_to do |format|
+    respond_to do |format|  
       if @incident_report.save
         format.html { redirect_to root_path, notice: 'Thank You Incident has been successfully Reported.' }
       else

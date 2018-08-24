@@ -14,7 +14,7 @@ class IncidentReport < ApplicationRecord
   validates :description, presence: true
 
   def incident_report_type?
-  	self.incident_report_type != 'true'
+  	incident_report_type != '1'
   end
 
 

@@ -138,6 +138,7 @@ label {
   border-radius: 4px;
   border: 1px solid #ccc;
   cursor: pointer;
+  margin-right: 35px;
 }
 
 .custom-file-select {
@@ -152,6 +153,7 @@ label {
   text-align: center;
   margin-bottom: 20px;
   margin-top: 10px;
+  cursor: pointer;
 
 }
 
@@ -161,11 +163,12 @@ label {
   border: 1px solid #ccc;
   background: #ececec;
   display: inline-block;
+  cursor: pointer;
 }
 
 .custom-checkbox-div {
   float: right;
-  margin-right: 75%;
+  margin-right: 70%;
 }
 
 .border-box {

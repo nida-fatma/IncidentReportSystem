@@ -15,4 +15,12 @@ class DetailIncidentReport < ApplicationRecord
   accepts_nested_attributes_for :observer, reject_if: :all_blank
 
   # validates :incident_type, presence: true
+  validate :any_attributes_present?
+
+  def any_attributes_present?
+    if :all_blank
+      errors.add(:base, 'Please fill one of the detail field to submit 
+        report in detal or you can submit brief report')
+    end
+  end
 end

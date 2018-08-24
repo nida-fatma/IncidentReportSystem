@@ -23,7 +23,7 @@ $(document).on 'turbolinks:load', ->
     $('#file-name').text if @files.length > 1 then @files.length + ' files selected' else @files[0].name
   $('.detail-incident').on 'change', ->
     $('.detail-incident-section').toggle()
-    label = if this.checked then 'Report Incident in breif' else 'Report Incident in detail'
+    label = if this.checked then 'Report Incident in brief' else 'Report Incident in detail'
     $('.lable-text').text(label)
     return
   return
