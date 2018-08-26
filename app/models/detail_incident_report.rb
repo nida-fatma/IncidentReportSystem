@@ -26,13 +26,14 @@ class DetailIncidentReport < ApplicationRecord
   validate :any_attributes_present?
   validate :date_observed
 
+  # Delegates
   delegate :role, :to => :observer, :prefix => true, :allow_nil => true
 
   private
 
   # Raise error if no any attributes present in detail report
-  def any_attributes_present?   
-    errors.add(:base, :invalid) if attributes.all?(&:blank?)
+  def any_attributes_present?  
+    errors.add(:base, :invalid) if attributes.values.all?(&:blank?)
   end
 
   # Raise error if date is future date

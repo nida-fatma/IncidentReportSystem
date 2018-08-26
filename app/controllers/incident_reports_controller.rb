@@ -4,8 +4,8 @@ class IncidentReportsController < ApplicationController
   # GET /incident_reports/new
   def new
     @incident_report = IncidentReport.new
-    @detail_incident_report = @incident_report.build_detail_incident_report
-    @detail_incident_report.build_observer
+    detail_incident_report = @incident_report.build_detail_incident_report
+    detail_incident_report.build_observer
   end
 
   # POST /incident_reports

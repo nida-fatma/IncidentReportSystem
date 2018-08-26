@@ -4,7 +4,7 @@ module IncidentReportsHelper
 
 	# Label to show for swithing b/w brief and detail view
 	def incident_label(incident)
-		incident.incident_report_type? ? I18n.t("brief_report") : I18n.t("detail_report")
+		incident.incident_report_type? ? I18n.t("detail_report") : I18n.t("brief_report")
 	end
 
 	# Class to manage visibilaty of detail form
